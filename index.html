@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Central's Printing Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Central's Printing Services - Custom Stylesheet */
+      :root {
+        --primary-blue: #4c76cd;
+        --primary-blue-dark: #3b5fb0;
+        --cta-green: #72b694;
+        --cta-green-hover: #5fa481;
+        --open-green: #28a745;
+        --open-green-bg: rgba(40, 167, 69, 0.12);
+        --bg-body: #f4f6f9;
+        --card-surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-muted: #6c757d;
+        --link-blue: #3b82f6;
+        --border-light: #e2e8f0;
+        --card-shadow: 0px 4px 16px rgba(15, 23, 42, 0.07);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-primary);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Loading Screen Overlay */
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: linear-gradient(165deg, #4c76cd 0%, #3658a7 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        transition:
+          opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+          visibility 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      #loading-screen.hidden-loader {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .top-progress-track {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        z-index: 10000;
+      }
+
+      .top-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #facc15;
+        transition: width 0.15s ease-out;
+      }
+
+      .loader-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 28px 28px 24px;
+        width: 100%;
+        max-width: 310px;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.28);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        animation: loaderFloat 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes loaderFloat {
+        0% {
+          transform: translateY(0px) scale(0.99);
+        }
+        100% {
+          transform: translateY(-6px) scale(1.01);
+        }
+      }
+
+      .loader-logo-wrap {
+        width: 185px;
+        height: 185px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .loader-logo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .loader-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+      }
+
+      .loader-subtitle {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin-bottom: 16px;
+      }
+
+      .loader-bar-wrap {
+        width: 100%;
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .loader-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #4c76cd, #72b694);
+        border-radius: 999px;
+        transition: width 0.15s ease-out;
+      }
+
+      /* Top Hero Banner & Wave */
+      .hero-header {
+        position: relative;
+        background-color: var(--primary-blue);
+        color: #ffffff;
+        padding-top: 28px;
+        padding-bottom: 130px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero-header-inner {
+        max-width: 540px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .hero-page-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        color: #ffffff;
+      }
+
+      .replay-loader-btn {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.16);
+        hover: rgba(255, 255, 255, 0.26);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        padding: 5px 11px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition:
+          background 0.2s ease,
+          transform 0.15s ease;
+      }
+
+      .replay-loader-btn:hover {
+        background: rgba(255, 255, 255, 0.28);
+      }
+
+      .hero-wave {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        pointer-events: none;
+      }
+
+      .hero-wave svg {
+        display: block;
+        width: 100%;
+        height: 56px;
+      }
+
+      /* Main Page Container */
+      .page-container {
+        max-width: 520px;
+        margin: -102px auto 0;
+        padding: 0 16px 96px;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Cards */
+      .content-card {
+        background: var(--card-surface);
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        padding: 24px 22px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(226, 232, 240, 0.7);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .hero-card {
+        text-align: center;
+        padding: 28px 24px 24px;
+      }
+
+      .logo-frame {
+        width: 220px;
+        height: 220px;
+        max-width: 100%;
+        margin: 0 auto 20px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      }
+
+      .logo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .business-tagline {
+        font-size: 0.98rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+        margin: 0 auto 22px;
+        max-width: 380px;
+        font-weight: 500;
+      }
+
+      .btn-more-details {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        background-color: var(--cta-green);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.98rem;
+        padding: 14px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(114, 182, 148, 0.35);
+        transition:
+          background-color 0.2s ease,
+          transform 0.15s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .btn-more-details:hover {
+        background-color: var(--cta-green-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(114, 182, 148, 0.45);
+      }
+
+      .btn-services-toggle {
+        margin-top: 10px;
+        background: transparent;
+        color: var(--primary-blue);
+        border: 1px solid rgba(76, 118, 205, 0.3);
+        border-radius: 10px;
+        padding: 10px 16px;
+        width: 100%;
+        font-size: 0.86rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: background-color 0.2s ease;
+      }
+
+      .btn-services-toggle:hover {
+        background: rgba(76, 118, 205, 0.06);
+      }
+
+      .services-drawer {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px dashed var(--border-light);
+        text-align: left;
+        display: none;
+      }
+
+      .services-drawer.open {
+        display: block;
+      }
+
+      .service-chips {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      .service-chip {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      /* Section Headers inside Cards */
+      .section-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .section-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(76, 118, 205, 0.1);
+        color: var(--primary-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .section-title-wrap {
+        flex: 1;
+      }
+
+      .section-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.3;
+      }
+
+      .status-badge-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 3px;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--open-green);
+        display: inline-block;
+      }
+
+      .status-open-text {
+        color: var(--open-green);
+        font-weight: 700;
+      }
+
+      .status-closed-text {
+        color: #dc2626;
+        font-weight: 700;
+      }
+
+      /* Open Hours List */
+      .hours-list {
+        list-style: none;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 12px;
+      }
+
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+
+      .hours-row.today-row {
+        background-color: rgba(76, 118, 205, 0.08);
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .hours-day {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .today-pill {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: var(--primary-blue);
+        color: #ffffff;
+        padding: 2px 7px;
+        border-radius: 999px;
+      }
+
+      /* Address Section */
+      .address-body {
+        padding-left: 52px;
+      }
+
+      .address-text {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+      }
+
+      .address-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .map-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--link-blue);
+        font-weight: 600;
+        font-size: 0.93rem;
+        text-decoration: none;
+      }
+
+      .map-link:hover {
+        text-decoration: underline;
+      }
+
+      .btn-copy-small {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: background 0.15s ease;
+      }
+
+      .btn-copy-small:hover {
+        background: #e2e8f0;
+      }
+
+      /* Social Networks Row */
+      .social-item-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--text-primary);
+        transition:
+          background-color 0.2s ease,
+          transform 0.15s ease;
+      }
+
+      .social-item-link:hover {
+        background: #f1f5f9;
+        transform: translateX(2px);
+      }
+
+      .social-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .fb-icon-box {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: #1877f2;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .social-item-title {
+        font-size: 0.96rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .social-item-sub {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* Contact List */
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .contact-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #edf2f7;
+        gap: 10px;
+      }
+
+      .contact-row-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .contact-mini-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .contact-meta {
+        min-width: 0;
+      }
+
+      .contact-label {
+        font-size: 0.76rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .contact-value,
+      .contact-value-link {
+        font-size: 0.93rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-decoration: none;
+        word-break: break-all;
+        display: block;
+      }
+
+      .contact-value-link:hover {
+        color: var(--primary-blue);
+        text-decoration: underline;
+      }
+
+      /* Floating Action Button (FAB) */
+      .fab-button {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: var(--primary-blue);
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 8px 24px rgba(76, 118, 205, 0.45);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 900;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .fab-button:hover {
+        background-color: var(--primary-blue-dark);
+        transform: scale(1.06);
+      }
+
+      /* Slide-Up Action Modal Overlay */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(2px);
+        z-index: 1000;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.25s ease,
+          visibility 0.25s ease;
+      }
+
+      .modal-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .action-sheet {
+        background: #ffffff;
+        width: 100%;
+        max-width: 520px;
+        border-radius: 20px 20px 0 0;
+        padding: 20px 20px 26px;
+        box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.18);
+        transform: translateY(100%);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .modal-backdrop.active .action-sheet {
+        transform: translateY(0);
+      }
+
+      .action-sheet-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .action-sheet-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .modal-close-x {
+        background: #f1f5f9;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #475569;
+        cursor: pointer;
+      }
+
+      .action-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .action-sheet-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        padding: 13px 16px;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.15s ease;
+      }
+
+      .action-sheet-item:hover {
+        background: #edf2f7;
+      }
+
+      .action-cancel-btn {
+        margin-top: 12px;
+        width: 100%;
+        padding: 13px;
+        border-radius: 12px;
+        border: none;
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+
+      .action-cancel-btn:hover {
+        background: #e2e8f0;
+      }
+
+      /* Toast Notification */
+      .toast-container {
+        position: fixed;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #1e293b;
+        color: #ffffff;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0.2s ease;
+        z-index: 2000;
+        white-space: nowrap;
+      }
+
+      .toast-container.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      @media (max-width: 480px) {
+        .address-body {
+          padding-left: 0;
+        }
+        .service-chips {
+          grid-template-columns: 1fr;
+        }
+        .hero-page-title {
+          font-size: 1.15rem;
+        }
+        .replay-loader-btn span {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen with Business Logo -->
+    <div id="loading-screen" role="status" aria-live="polite">
+      <div class="top-progress-track">
+        <div id="top-progress-bar" class="top-progress-bar"></div>
+      </div>
+      <div class="loader-card">
+        <div class="loader-logo-wrap">
+          <img
+            id="loader-logo-img"
+            class="loader-logo-img"
+            src="images/48l8ZW_93128dd3cf568e94.png"
+            alt="Central's Printing Services Logo"
+          />
+        </div>
+        <div class="loader-title">Central's Printing Services</div>
+        <div class="loader-subtitle">Loading business profile...</div>
+        <div class="loader-bar-wrap">
+          <div id="loader-bar-fill" class="loader-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Royal Blue Header with Curved Wave Bottom -->
+    <header class="hero-header">
+      <div class="hero-header-inner">
+        <h1 class="hero-page-title">Centrals Printing Services</h1>
+      </div>
+      <div class="hero-wave">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path
+            fill="#F4F6F9"
+            d="M0,32L80,42.7C160,53,320,75,480,80C640,85,800,75,960,64C1120,53,1280,43,1360,37.3L1440,32L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+          ></path>
+        </svg>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="page-container">
+      <!-- Hero Business Card -->
+      <section class="content-card hero-card" aria-label="Business Overview">
+        <div class="logo-frame">
+          <img
+            id="main-logo-img"
+            src="images/48l8ZW_93128dd3cf568e94.png"
+            alt="Central's Printing Services Logo"
+          />
+        </div>
+        <p class="business-tagline">
+          We print on t-shirts, mugs, and we also make jerseys and uniforms
+        </p>
+        <a
+          class="btn-more-details"
+          href="https://www.canva.com/design/DAG7Yc9PxDs/I_AKWlLAH--WMmg5_of_AA/view?utm_content=DAG7Yc9PxDs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h609147f732"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>More details</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+            ></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+
+        <button
+          id="toggle-services-btn"
+          class="btn-services-toggle"
+          type="button"
+        >
+          View Quick Services Summary ▼
+        </button>
+
+        <div id="services-drawer" class="services-drawer">
+          <div
+            style="
+              font-size: 0.82rem;
+              font-weight: 700;
+              color: #475569;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            "
+          >
+            What We Offer
+          </div>
+          <div class="service-chips">
+            <div class="service-chip">👕 Custom T-Shirt Printing</div>
+            <div class="service-chip">☕ Personalized Mugs</div>
+            <div class="service-chip">🏀 Custom Sports Jerseys</div>
+            <div class="service-chip">👔 School &amp; Team Uniforms</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Open Hours Card -->
+      <section class="content-card" aria-label="Open Hours">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="section-title-wrap">
+            <h2 class="section-title">Open hours</h2>
+            <div class="status-badge-inline">
+              <span id="open-status-dot" class="status-dot"></span>
+              <span id="open-status-text" class="status-open-text"
+                >Open now</span
+              >
+            </div>
+          </div>
+        </div>
+        <ul id="hours-list" class="hours-list"></ul>
+      </section>
+
+      <!-- Address Card -->
+      <section class="content-card" aria-label="Address">
+        <div class="section-header" style="margin-bottom: 10px">
+          <div class="section-icon" aria-hidden="true">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="section-title-wrap">
+            <h2 class="section-title">Address</h2>
+          </div>
+        </div>
+        <div class="address-body">
+          <p class="address-text">
+            153 Medina Compound Taytay, 1920, Calabarzon, Philippines
+          </p>
+          <div class="address-actions">
+            <a
+              class="map-link"
+              href="https://maps.app.goo.gl/nFaLrXXBQ3AeEr1g9"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"
+                ></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+              </svg>
+              <span>Show on Map</span>
+            </a>
+            <button id="copy-address-btn" class="btn-copy-small" type="button">
+              Copy Address
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Networks Card -->
+      <section class="content-card" aria-label="Our Social Networks">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </div>
+          <div class="section-title-wrap">
+            <h2 class="section-title">Our Social Networks</h2>
+          </div>
+        </div>
+        <a
+          class="social-item-link"
+          href="https://www.facebook.com/nash.minor.2405"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="social-left">
+            <div class="fb-icon-box" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <div class="social-item-title">Facebook</div>
+              <div class="social-item-sub">Contact us</div>
+            </div>
+          </div>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#6C757D"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </section>
+
+      <!-- Contact Card -->
+      <section class="content-card" aria-label="Contact Information">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <div class="section-title-wrap">
+            <h2 class="section-title">Contact</h2>
+          </div>
+        </div>
+
+        <div class="contact-list">
+          <!-- Business Name -->
+          <div class="contact-row">
+            <div class="contact-row-left">
+              <div class="contact-mini-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="contact-meta">
+                <div class="contact-label">Business</div>
+                <div class="contact-value">Central's Printing Services</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Owner Phone -->
+          <div class="contact-row">
+            <div class="contact-row-left">
+              <div class="contact-mini-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="contact-meta">
+                <div class="contact-label">Owner</div>
+                <a class="contact-value-link" href="tel:+639562153055"
+                  >+639562153055</a
+                >
+              </div>
+            </div>
+            <button id="copy-owner-phone" class="btn-copy-small" type="button">
+              Copy
+            </button>
+          </div>
+
+          <!-- Co-Owner Phone -->
+          <div class="contact-row">
+            <div class="contact-row-left">
+              <div class="contact-mini-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="contact-meta">
+                <div class="contact-label">Co-Owner</div>
+                <a class="contact-value-link" href="tel:+639207226546"
+                  >+639207226546</a
+                >
+              </div>
+            </div>
+            <button
+              id="copy-coowner-phone"
+              class="btn-copy-small"
+              type="button"
+            >
+              Copy
+            </button>
+          </div>
+
+          <!-- Official Email -->
+          <div class="contact-row">
+            <div class="contact-row-left">
+              <div class="contact-mini-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="contact-meta">
+                <div class="contact-label">Official Email</div>
+                <a
+                  class="contact-value-link"
+                  href="mailto:monornash2405@gmail.com"
+                  >monornash2405@gmail.com</a
+                >
+              </div>
+            </div>
+            <button id="copy-email-btn" class="btn-copy-small" type="button">
+              Copy
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Action Button (3 Vertical Dots) -->
+    <button
+      id="fab-open-actions"
+      class="fab-button"
+      type="button"
+      aria-label="Open Quick Actions"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="5" r="2.2"></circle>
+        <circle cx="12" cy="12" r="2.2"></circle>
+        <circle cx="12" cy="19" r="2.2"></circle>
+      </svg>
+    </button>
+
+    <!-- Slide-Up Quick Actions Modal -->
+    <div
+      id="actions-modal"
+      class="modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="actions-modal-title"
+    >
+      <div class="action-sheet">
+        <div class="action-sheet-header">
+          <h3 id="actions-modal-title" class="action-sheet-title">Actions</h3>
+          <button
+            id="modal-close-x"
+            class="modal-close-x"
+            type="button"
+            aria-label="Close Actions"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="action-list">
+          <a class="action-sheet-item" href="tel:+639562153055">
+            <span>📞</span>
+            <span>Call: Owner (+639562153055)</span>
+          </a>
+          <a class="action-sheet-item" href="tel:+639207226546">
+            <span>📱</span>
+            <span>Call: Co-Owner (+639207226546)</span>
+          </a>
+          <a class="action-sheet-item" href="mailto:monornash2405@gmail.com">
+            <span>✉️</span>
+            <span>Email: Official Email</span>
+          </a>
+          <button id="action-share-btn" class="action-sheet-item" type="button">
+            <span>🔗</span>
+            <span>Share</span>
+          </button>
+          <button
+            id="action-replay-loader"
+            class="action-sheet-item"
+            type="button"
+          >
+            <span>✨</span>
+            <span>Replay Logo Loading Screen</span>
+          </button>
+        </div>
+        <button id="modal-cancel-btn" class="action-cancel-btn" type="button">
+          CANCEL
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast-notification"
+      class="toast-container"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <script>
+      // Central's Printing Services - Interactive Logic
+      const FALLBACK_LOGO_URI =
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgMzYwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJiZ1BhdHRlcm4iIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI0Y4RkFGQyIvPgogICAgICA8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRTJFOEYwIiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgPHBhdGggZD0iTTIwIDAgTDI2IDE0IEw0MCAyMCBMMjYgMjYgTDIwIDQwIEwxNCAyNiBMMCAyMCBMMTQgMTQgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRURGMkY3IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgIDwvcGF0dGVybj4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZEdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZBQ0MxNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0VBQjMwOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNDQThBMDQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHcmFkMiIgeDE9IjEwMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGREUwNDciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRDk3NzA2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iZW1ibGVtU2hhZG93IiB4PSItMTUlIiB5PSItMTUlIiB3aWR0aD0iMTMwJSIgaGVpZ2h0PSIxMzAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjQiIHN0ZERldmlhdGlvbj0iNSIgZmxvb2QtY29sb3I9IiMwRjE3MkEiIGZsb29kLW9wYWNpdHk9IjAuMTYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMzYwIiBoZWlnaHQ9IjM2MCIgcng9IjIwIiBmaWxsPSJ1cmwoI2JnUGF0dGVybikiIHN0cm9rZT0iI0UyRThGMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTgwLCAxNDIpIiBmaWx0ZXI9InVybCgjZW1ibGVtU2hhZG93KSI+CiAgICA8IS0tIE91dGVyIGdlb21ldHJpYyByaWJib24gbG9vcCAtLT4KICAgIDxwYXRoIGQ9Ik0gLTUyIC02OCBMIDUyIC02OCBDIDY0IC02OCA2OCAtNjQgNjggLTUyIEwgNjggNTIgQyA2OCA2NCA2NCA2OCA1MiA2OCBMIC01MiA2OCBDIC02NCA2OCAtNjggNjQgLTY4IDUyIEwgLTY4IC01MiBDIC02OCAtNjQgLTY0IC02OCAtNTIgLTY4IFoKICAgICAgICAgICAgIE0gLTM0IC00NCBMIC0zNCAzNCBDIC0zNCA0MCAtMzAgNDQgLTI0IDQ0IEwgMzQgNDQgQyA0MCA0NCA0NCA0MCA0NCAzNCBMIDQ0IC0zNCBDIDQ0IC00MCA0MCAtNDQgMzQgLTQ0IEwgLTM0IC00NCBaIgogICAgICAgICAgZmlsbD0idXJsKCNnb2xkR3JhZDEpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KICAgIDwhLS0gSW50ZXJsb2NraW5nIGRpYW1vbmQgcmliYm9uIGFjY2VudCAtLT4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDQ1KSI+CiAgICAgIDxwYXRoIGQ9Ik0gLTQ2IC00NiBMIDQ2IC00NiBDIDU0IC00NiA1OCAtNDIgNTggLTM0IEwgNTggNDYgQyA1OCA1NCA1NCA1OCA0NiA1OCBMIC00NiA1OCBDIC01NCA1OCAtNTggNTQgLTU4IDQ2IEwgLTU4IC0zNCBDIC01OCAtNDIgLTU0IC00NiAtNDYgLTQ2IFoKICAgICAgICAgICAgICAgTSAtMjggLTI4IEwgLTI4IDI4IEwgMjggMjggTCAyOCAtMjggWiIKICAgICAgICAgICAgZmlsbD0idXJsKCNnb2xkR3JhZDIpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9IjAuOTIiLz4KICAgIDwvZz4KICAgIDwhLS0gSW5uZXIgZ2VvbWV0cmljIGNvcmUgLS0+CiAgICA8cmVjdCB4PSItMTgiIHk9Ii0xOCIgd2lkdGg9IjM2IiBoZWlnaHQ9IjM2IiByeD0iNiIgZmlsbD0iIzFFMjkzQiIvPgogICAgPHJlY3QgeD0iLTgiIHk9Ii04IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHJ4PSIzIiBmaWxsPSIjRkFDQzE1Ii8+CiAgPC9nPgogIDwhLS0gVHlwb2dyYXBoeSAtLT4KICA8dGV4dCB4PSIxODAiIHk9IjI2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgJ1NlZ29lIFVJJywgUm9ib3RvLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjI1IiBsZXR0ZXItc3BhY2luZz0iMS44IiBmaWxsPSIjMUUyOTNCIj5DRU5UUkFMJ1M8L3RleHQ+CiAgPHRleHQgeD0iMTgwIiB5PSIyOTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sICdTZWdvZSBVSScsIFJvYm90bywgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIxNi41IiBsZXR0ZXItc3BhY2luZz0iMi44IiBmaWxsPSIjMzM0MTU1Ij5QUklOVElORyBTRVJWSUNFUzwvdGV4dD4KICA8cmVjdCB4PSIxMTUiIHk9IjMxMiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIzLjUiIHJ4PSIxLjc1IiBmaWxsPSIjRUFCMzA4Ii8+Cjwvc3ZnPg==";
+      const REMOTE_LOGO_URL = "images/48l8ZW_93128dd3cf568e94.png";
+
+      const SCHEDULE_DATA = [
+        { day: "Monday", open: "08:00 am", close: "07:00 pm", dayIndex: 1 },
+        { day: "Tuesday", open: "08:00 am", close: "07:00 pm", dayIndex: 2 },
+        { day: "Wednesday", open: "08:00 am", close: "07:00 pm", dayIndex: 3 },
+        { day: "Thursday", open: "08:00 am", close: "07:00 pm", dayIndex: 4 },
+        { day: "Friday", open: "08:00 am", close: "07:00 pm", dayIndex: 5 },
+        { day: "Saturday", open: "08:00 am", close: "07:00 pm", dayIndex: 6 },
+        { day: "Sunday", open: "08:00 am", close: "07:00 pm", dayIndex: 0 },
+      ];
+
+      let loaderTimer = null;
+      let loaderFinishTimeout = null;
+      let toastTimeout = null;
+
+      function applyLogoFallback(imgElement) {
+        if (!imgElement) return;
+        imgElement.onerror = function () {
+          if (this.src !== FALLBACK_LOGO_URI) {
+            this.src = FALLBACK_LOGO_URI;
+          }
+        };
+        if (imgElement.complete && imgElement.naturalWidth === 0) {
+          imgElement.src = FALLBACK_LOGO_URI;
+        }
+      }
+
+      function runLoadingScreen(durationMs) {
+        const loader = document.getElementById("loading-screen");
+        const topBar = document.getElementById("top-progress-bar");
+        const cardBar = document.getElementById("loader-bar-fill");
+        if (!loader || !topBar || !cardBar) return;
+
+        if (loaderTimer) clearInterval(loaderTimer);
+        if (loaderFinishTimeout) clearTimeout(loaderFinishTimeout);
+
+        loader.classList.remove("hidden-loader");
+        topBar.style.width = "0%";
+        cardBar.style.width = "0%";
+
+        let progress = 0;
+        const stepMs = 40;
+        const increment = 100 / (durationMs / stepMs);
+
+        loaderTimer = setInterval(function () {
+          progress = Math.min(100, progress + increment);
+          topBar.style.width = progress.toFixed(0) + "%";
+          cardBar.style.width = progress.toFixed(0) + "%";
+          if (progress >= 100) {
+            clearInterval(loaderTimer);
+            loaderTimer = null;
+            loaderFinishTimeout = setTimeout(function () {
+              loader.classList.add("hidden-loader");
+            }, 180);
+          }
+        }, stepMs);
+      }
+
+      function renderScheduleAndStatus() {
+        const listEl = document.getElementById("hours-list");
+        const statusTextEl = document.getElementById("open-status-text");
+        const statusDotEl = document.getElementById("open-status-dot");
+        if (!listEl) return;
+
+        // Determine current day & hour in Philippines time (UTC+8)
+        const now = new Date();
+        let manilaDay = now.getDay();
+        let manilaHour = now.getHours() + now.getMinutes() / 60;
+        try {
+          const parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Manila",
+            weekday: "short",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: false,
+          }).formatToParts(now);
+          const map = {};
+          parts.forEach(function (p) {
+            map[p.type] = p.value;
+          });
+          const wkMap = {
+            Sun: 0,
+            Mon: 1,
+            Tue: 2,
+            Wed: 3,
+            Thu: 4,
+            Fri: 5,
+            Sat: 6,
+          };
+          if (map.weekday in wkMap) manilaDay = wkMap[map.weekday];
+          if (map.hour !== undefined && map.minute !== undefined) {
+            manilaHour = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
+          }
+        } catch (e) {
+          // Fallback to local browser time
+        }
+
+        // Open daily from 8:00 AM (8.0) to 7:00 PM (19.0)
+        const isOpen = manilaHour >= 8 && manilaHour < 19;
+        if (statusTextEl && statusDotEl) {
+          if (isOpen) {
+            statusTextEl.textContent = "Open now";
+            statusTextEl.className = "status-open-text";
+            statusDotEl.style.backgroundColor = "#28A745";
+          } else {
+            statusTextEl.textContent = "Open now (08:00 am - 07:00 pm)";
+            statusTextEl.className = "status-open-text";
+            statusDotEl.style.backgroundColor = "#28A745";
+          }
+        }
+
+        listEl.innerHTML = "";
+        SCHEDULE_DATA.forEach(function (item) {
+          const li = document.createElement("li");
+          const isToday = item.dayIndex === manilaDay;
+          li.className = "hours-row" + (isToday ? " today-row" : "");
+
+          const daySpan = document.createElement("span");
+          daySpan.className = "hours-day";
+          daySpan.textContent = item.day;
+
+          if (isToday) {
+            const pill = document.createElement("span");
+            pill.className = "today-pill";
+            pill.textContent = "Today";
+            daySpan.appendChild(pill);
+          }
+
+          const timeSpan = document.createElement("span");
+          timeSpan.textContent = item.open + " - " + item.close;
+
+          li.appendChild(daySpan);
+          li.appendChild(timeSpan);
+          listEl.appendChild(li);
+        });
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast-notification");
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add("show");
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(function () {
+          toast.classList.remove("show");
+        }, 2600);
+      }
+
+      function copyTextToClipboard(text, label) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              showToast(label + " copied to clipboard!");
+            })
+            .catch(function () {
+              fallbackCopy(text, label);
+            });
+        } else {
+          fallbackCopy(text, label);
+        }
+      }
+
+      function fallbackCopy(text, label) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast(label + " copied to clipboard!");
+        } catch (err) {
+          showToast("Copy: " + text);
+        }
+        document.body.removeChild(ta);
+      }
+
+      function openActionsModal() {
+        const modal = document.getElementById("actions-modal");
+        if (modal) modal.classList.add("active");
+      }
+
+      function closeActionsModal() {
+        const modal = document.getElementById("actions-modal");
+        if (modal) modal.classList.remove("active");
+      }
+
+      function handleSharePage() {
+        const shareData = {
+          title: "Central's Printing Services",
+          text: "We print on t-shirts, mugs, and we also make jerseys and uniforms — 153 Medina Compound Taytay, Calabarzon, Philippines",
+          url: window.location.href,
+        };
+        if (navigator.share) {
+          navigator
+            .share(shareData)
+            .then(function () {
+              closeActionsModal();
+            })
+            .catch(function () {
+              copyTextToClipboard(
+                "Central's Printing Services | +639562153055 | 153 Medina Compound Taytay, 1920, Calabarzon, Philippines",
+                "Business info",
+              );
+              closeActionsModal();
+            });
+        } else {
+          copyTextToClipboard(
+            "Central's Printing Services | +639562153055 | 153 Medina Compound Taytay, 1920, Calabarzon, Philippines",
+            "Business details",
+          );
+          closeActionsModal();
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Attach logo fallback handlers
+        applyLogoFallback(document.getElementById("loader-logo-img"));
+        applyLogoFallback(document.getElementById("main-logo-img"));
+
+        // Start initial loading screen with logo
+        runLoadingScreen(1450);
+
+        // Render schedule rows
+        renderScheduleAndStatus();
+
+        // Replay loading screen buttons
+        const replayTopBtn = document.getElementById("replay-loader-btn");
+        if (replayTopBtn) {
+          replayTopBtn.addEventListener("click", function () {
+            runLoadingScreen(1500);
+          });
+        }
+
+        const replayModalBtn = document.getElementById("action-replay-loader");
+        if (replayModalBtn) {
+          replayModalBtn.addEventListener("click", function () {
+            closeActionsModal();
+            runLoadingScreen(1500);
+          });
+        }
+
+        // Services summary drawer toggle
+        const servicesBtn = document.getElementById("toggle-services-btn");
+        const servicesDrawer = document.getElementById("services-drawer");
+        if (servicesBtn && servicesDrawer) {
+          servicesBtn.addEventListener("click", function () {
+            const isOpen = servicesDrawer.classList.toggle("open");
+            servicesBtn.innerHTML = isOpen
+              ? "Hide Services Summary ▲"
+              : "View Quick Services Summary ▼";
+          });
+        }
+
+        // Copy buttons
+        const copyAddressBtn = document.getElementById("copy-address-btn");
+        if (copyAddressBtn) {
+          copyAddressBtn.addEventListener("click", function () {
+            copyTextToClipboard(
+              "153 Medina Compound Taytay, 1920, Calabarzon, Philippines",
+              "Address",
+            );
+          });
+        }
+
+        const copyOwnerBtn = document.getElementById("copy-owner-phone");
+        if (copyOwnerBtn) {
+          copyOwnerBtn.addEventListener("click", function () {
+            copyTextToClipboard("+639562153055", "Owner phone number");
+          });
+        }
+
+        const copyCoOwnerBtn = document.getElementById("copy-coowner-phone");
+        if (copyCoOwnerBtn) {
+          copyCoOwnerBtn.addEventListener("click", function () {
+            copyTextToClipboard("+639207226546", "Co-Owner phone number");
+          });
+        }
+
+        const copyEmailBtn = document.getElementById("copy-email-btn");
+        if (copyEmailBtn) {
+          copyEmailBtn.addEventListener("click", function () {
+            copyTextToClipboard("monornash2405@gmail.com", "Official email");
+          });
+        }
+
+        // Floating Action Button & Modal controls
+        const fabBtn = document.getElementById("fab-open-actions");
+        if (fabBtn) {
+          fabBtn.addEventListener("click", openActionsModal);
+        }
+
+        const closeXBtn = document.getElementById("modal-close-x");
+        if (closeXBtn) {
+          closeXBtn.addEventListener("click", closeActionsModal);
+        }
+
+        const cancelBtn = document.getElementById("modal-cancel-btn");
+        if (cancelBtn) {
+          cancelBtn.addEventListener("click", closeActionsModal);
+        }
+
+        const modalBackdrop = document.getElementById("actions-modal");
+        if (modalBackdrop) {
+          modalBackdrop.addEventListener("click", function (e) {
+            if (e.target === modalBackdrop) {
+              closeActionsModal();
+            }
+          });
+        }
+
+        const shareBtn = document.getElementById("action-share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", handleSharePage);
+        }
+      });
+    </script>
+  </body>
+</html>
