@@ -520,6 +520,21 @@
       }
 
       /* Social Networks Row */
+      .social-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .social-item-label {
+        font-size: 0.76rem;
+        color: var(--primary-blue);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-bottom: 2px;
+      }
+
       .social-item-link {
         display: flex;
         align-items: center;
@@ -844,6 +859,27 @@
     <header class="hero-header">
       <div class="hero-header-inner">
         <h1 class="hero-page-title">Centrals Printing Services</h1>
+        <button
+          id="replay-loader-btn"
+          class="replay-loader-btn"
+          type="button"
+          title="Replay Logo Loading Screen"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          <span>Replay Intro</span>
+        </button>
       </div>
       <div class="hero-wave">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
@@ -1037,43 +1073,129 @@
             <h2 class="section-title">Our Social Networks</h2>
           </div>
         </div>
-        <a
-          class="social-item-link"
-          href="https://www.facebook.com/nash.minor.2405"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="social-left">
-            <div class="fb-icon-box" aria-hidden="true">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <div class="social-item-title">Facebook</div>
-              <div class="social-item-sub">Contact us</div>
-            </div>
-          </div>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#6C757D"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <div class="social-list">
+          <!-- 1. Central's Printing Services Page -->
+          <a
+            class="social-item-link"
+            href="https://www.facebook.com/centrals.printing.services"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
+            <div class="social-left">
+              <div class="fb-icon-box" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <div class="social-item-label">
+                  Central's Printing Services Page
+                </div>
+                <div class="social-item-title">Central's Printing Services</div>
+                <div class="social-item-sub">Facebook • Contact us</div>
+              </div>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6C757D"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+
+          <!-- 2. Owner -->
+          <a
+            class="social-item-link"
+            href="https://www.facebook.com/nash.minor.2405"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="social-left">
+              <div class="fb-icon-box" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <div class="social-item-label">Owner</div>
+                <div class="social-item-title">Aaron Minor</div>
+                <div class="social-item-sub">Facebook • Contact us</div>
+              </div>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6C757D"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+
+          <!-- 3. Co-Owner -->
+          <a
+            class="social-item-link"
+            href="https://www.facebook.com/jinky.minor.18"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="social-left">
+              <div class="fb-icon-box" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <div class="social-item-label">Co-Owner</div>
+                <div class="social-item-title">Jinky Minor</div>
+                <div class="social-item-sub">Facebook • Contact us</div>
+              </div>
+            </div>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6C757D"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
       </section>
 
       <!-- Contact Card -->
